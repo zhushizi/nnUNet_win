@@ -148,7 +148,7 @@ class nnUNetTrainer(object):
         self.probabilistic_oversampling = False
         self.num_iterations_per_epoch = 250
         self.num_val_iterations_per_epoch = 50
-        self.num_epochs = 1000
+        self.num_epochs = 150 #1000
         self.current_epoch = 0
         self.enable_deep_supervision = True
 
@@ -938,7 +938,7 @@ class nnUNetTrainer(object):
         # dirty hack because on_epoch_end increments the epoch counter and this is executed afterwards.
         # This will lead to the wrong current epoch to be stored
         self.current_epoch -= 1
-        self.save_checkpoint(join(self.output_folder, "checkpoint_final.pth"))
+        self.save_checkpoint(join(self.output_folder, "checkpoint_best.pth"))
         self.current_epoch += 1
 
         # now we can delete latest

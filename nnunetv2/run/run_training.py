@@ -73,7 +73,7 @@ def maybe_load_checkpoint(nnunet_trainer: nnUNetTrainer, continue_training: bool
         raise RuntimeError('Cannot both continue a training AND load pretrained weights. Pretrained weights can only '
                            'be used at the beginning of the training.')
     if continue_training:
-        expected_checkpoint_file = join(nnunet_trainer.output_folder, 'checkpoint_final.pth')
+        expected_checkpoint_file = join(nnunet_trainer.output_folder, 'checkpoint_best.pth')
         if not isfile(expected_checkpoint_file):
             expected_checkpoint_file = join(nnunet_trainer.output_folder, 'checkpoint_latest.pth')
         # special case where --c is used to run a previously aborted validation
@@ -84,7 +84,7 @@ def maybe_load_checkpoint(nnunet_trainer: nnUNetTrainer, continue_training: bool
                                f"continue from. Starting a new training...")
             expected_checkpoint_file = None
     elif validation_only:
-        expected_checkpoint_file = join(nnunet_trainer.output_folder, 'checkpoint_final.pth')
+        expected_checkpoint_file = join(nnunet_trainer.output_folder, 'checkpoint_best.pth')
         if not isfile(expected_checkpoint_file):
             raise RuntimeError(f"Cannot run validation because the training is not finished yet!")
     else:

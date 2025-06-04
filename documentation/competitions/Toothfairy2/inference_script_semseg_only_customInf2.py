@@ -55,7 +55,7 @@ class CustomPredictor(nnUNetPredictor):
 
     def initialize_from_trained_model_folder(self, model_training_output_dir: str,
                                              use_folds: Union[Tuple[Union[int, str]], None],
-                                             checkpoint_name: str = 'checkpoint_final.pth'):
+                                             checkpoint_name: str = 'checkpoint_best.pth'):
         """
         This is used when making predictions with a trained model
         """
@@ -216,7 +216,7 @@ def predict_semseg(im, prop, semseg_trained_model, semseg_folds):
     pred_semseg.initialize_from_trained_model_folder(
         semseg_trained_model,
         use_folds=semseg_folds,
-        checkpoint_name='checkpoint_final.pth'
+        checkpoint_name='checkpoint_best.pth'
     )
 
     semseg_pred = pred_semseg.predict_single_npy_array(
